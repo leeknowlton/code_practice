@@ -17,7 +17,10 @@ module Enumerable
   end
 
   def my_select
-
+    return self unless block_given?
+    self.my_each do |i|
+      yield(i)
+    end
   end
 end
 
@@ -25,15 +28,10 @@ a = [1,2,10,4,5]
 h = { "a" => 100, "b" => 200, "c" => 300 }
 
 # my_select
-  a.my_select do |i, index|
-    puts i
-    puts index
-  end
 
-  h.my_select do |i, index|
-    puts i
-    puts index
-  end
+  puts a.select {|num| num.even?}
+
+  puts h.select {|k,v| k > "a"}
 
 
 # my_each_with_index
